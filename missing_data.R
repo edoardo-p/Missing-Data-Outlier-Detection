@@ -1,0 +1,22 @@
+library(mclust)
+source("distributions.R")
+
+par(mfrow = c(2, 3))
+plot(tm_small, pch = 19, xlab = "d1", ylab = "d2")
+plot(mcnm_small, pch = 19, xlab = "d1", ylab = "d2")
+plot(mnm_small, pch = 19, xlab = "d1", ylab = "d2")
+plot(mnm_small_one, pch = 19, xlab = "d1", ylab = "d2")
+plot(mnm_small_five, pch = 19, xlab = "d1", ylab = "d2")
+plot(mnm_small_thirty, pch = 19, xlab = "d1", ylab = "d2")
+
+par(mfrow = c(2, 3))
+plot(tm_large, pch = 19, xlab = "d1", ylab = "d2")
+plot(mcnm_large, pch = 19, xlab = "d1", ylab = "d2")
+plot(mnm_large, pch = 19, xlab = "d1", ylab = "d2")
+plot(mnm_large_one, pch = 19, xlab = "d1", ylab = "d2")
+plot(mnm_large_five, pch = 19, xlab = "d1", ylab = "d2")
+plot(mnm_large_thirty, pch = 19, xlab = "d1", ylab = "d2")
+
+par(mfrow = c(1, 1))
+res <- Mclust(mnm_large, G = 2)
+plot(res)
