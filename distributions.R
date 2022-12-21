@@ -1,16 +1,16 @@
 library(mvtnorm)
 
-rmix <- function(n, prop, mix1, mix2) {
-  u <- runif(n)
-  tm <- matrix(nrow = n, ncol = 2)
-  for (i in 1:n) {
-    if (u[i] < prop) {
-      tm[i, ] <- mix1()
+rmix <- function(sample_size, prior, comp1, comp2) {
+  uniform <- runif(sample_size)
+  mixture <- matrix(nrow = sample_size, ncol = 2)
+  for (i in 1:sample_size) {
+    if (uniform[i] < prior) {
+      mixture[i, ] <- comp1()
     } else {
-      tm[i, ] <- mix2()
+      mixture[i, ] <- comp2()
     }
   }
-  return(tm)
+  return(mixture)
 }
 
 contaminate <- function(data, eta, criterion) {
