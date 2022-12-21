@@ -2,12 +2,12 @@ library(mvtnorm)
 
 rmix <- function(sample_size, prior, comp1, comp2) {
   uniform <- runif(sample_size)
-  mixture <- matrix(nrow = sample_size, ncol = 2)
+  mixture <- matrix(nrow = sample_size, ncol = 3)
   for (i in 1:sample_size) {
     if (uniform[i] < prior) {
-      mixture[i, ] <- comp1()
+      mixture[i, ] <- c(comp1(), 1)
     } else {
-      mixture[i, ] <- comp2()
+      mixture[i, ] <- c(comp2(), 2)
     }
   }
   return(mixture)
