@@ -5,9 +5,9 @@ rmix <- function(sample_size, prior, comp1, comp2) {
   mixture <- matrix(nrow = sample_size, ncol = 3)
   for (i in 1:sample_size) {
     if (uniform[i] < prior) {
-      mixture[i, ] <- c(comp1(), 1)
+      mixture[i, ] <- comp1()
     } else {
-      mixture[i, ] <- c(comp2(), 2)
+      mixture[i, ] <- comp2()
     }
   }
   return(mixture)
@@ -15,7 +15,7 @@ rmix <- function(sample_size, prior, comp1, comp2) {
 
 contaminate <- function(data, eta, criterion) {
   for (i in sample(1:nrow(data), nrow(data) * eta)) {
-    data[i, 1:2] <- criterion()
+    data[i, ] <- c(criterion(), 3)
   }
   return(data)
 }
@@ -23,7 +23,7 @@ contaminate <- function(data, eta, criterion) {
 ampute <- function(data, prop) {
   missing <- sample(1:nrow(data), nrow(data) * prop)
   for (i in missing) {
-    select <- sample(1:2, 1)
+    select <- sample(1:ncol(data), 1)
     data[i, select] <- NA
   }
   return(data)
@@ -42,24 +42,24 @@ mu2 <- c(0, 3)
 sigma1 <- matrix(c(1, -0.5, -0.5, 1), nrow = 2)
 sigma2 <- matrix(c(1, 0.5, 0.5, 1), nrow = 2)
 
-tm1_far <- function() mu1_far + rmvt(1, sigma1, 4)
-tm1_close <- function() mu1_close + rmvt(1, sigma1, 4)
-tm2 <- function() mu2 + rmvt(1, sigma2, 10)
+tm1_far <- function() c(mu1_far + rmvt(1, sigma1, 4), 1)
+tm1_close <- function() c(mu1_close + rmvt(1, sigma1, 4), 1)
+tm2 <- function() c(mu2 + rmvt(1, sigma2, 10), 2)
 
-mcn_good_1_far <- function() rmvnorm(1, mu1_far, sigma1)
-mcn_bad_1_far <- function() rmvnorm(1, mu1_far, 20 * sigma1)
-mcn_good_1_close <- function() rmvnorm(1, mu1_close, sigma1)
-mcn_bad_1_close <- function() rmvnorm(1, mu1_close, 20 * sigma1)
-mcn_good_2 <- function() rmvnorm(1, mu2, sigma2)
-mcn_bad_2 <- function() rmvnorm(1, mu2, 30 * sigma2)
+mcn_good_1_far <- function() c(rmvnorm(1, mu1_far, sigma1), 1)
+mcn_bad_1_far <- function() c(rmvnorm(1, mu1_far, 20 * sigma1), 3)
+mcn_good_1_close <- function() c(rmvnorm(1, mu1_close, sigma1), 1)
+mcn_bad_1_close <- function() c(rmvnorm(1, mu1_close, 20 * sigma1), 3)
+mcn_good_2 <- function() c(rmvnorm(1, mu2, sigma2), 2)
+mcn_bad_2 <- function() c(rmvnorm(1, mu2, 30 * sigma2), 3)
 
-mcn1_far <- function() rmix(1, 0.9, mcn_good_1_far, mcn_bad_1_far)[, -3]
-mcn1_close <- function() rmix(1, 0.9, mcn_good_1_close, mcn_bad_1_close)[, -3]
-mcn2 <- function() rmix(1, 0.8, mcn_good_2, mcn_bad_2)[, -3]
+mcn1_far <- function() rmix(1, 0.9, mcn_good_1_far, mcn_bad_1_far)
+mcn1_close <- function() rmix(1, 0.9, mcn_good_1_close, mcn_bad_1_close)
+mcn2 <- function() rmix(1, 0.8, mcn_good_2, mcn_bad_2)
 
-mnm1_far <- function() rmvnorm(1, mu1_far, sigma1)
-mnm1_close <- function() rmvnorm(1, mu1_close, sigma1)
-mnm2 <- function() rmvnorm(1, mu2, sigma2)
+mnm1_far <- function() c(rmvnorm(1, mu1_far, sigma1), 1)
+mnm1_close <- function() c(rmvnorm(1, mu1_close, sigma1), 1)
+mnm2 <- function() c(rmvnorm(1, mu2, sigma2), 2)
 
 tm_small <- rmix(n_small, pi1, tm1_close, tm2)
 tm_large <- rmix(n_large, pi1, tm1_close, tm2)
