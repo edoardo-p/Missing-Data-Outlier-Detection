@@ -22,50 +22,43 @@ music_data$duration_ms[which(music_data$duration_ms == -1)] <- NA
 music_data <- music_data[-which(is.na(music_data$duration_ms)), ]
 music_data <- music_data[-which(is.na(music_data$tempo)), ]
 
-# Save labeled genre for training the model
-label <- music_data[18]
-
 # Remove categorical variables and the label
-music_data <- music_data[-c(1, 2, 3, 10, 13, 16, 18)]
+music_data <- music_data[-c(1, 2, 3, 10, 13, 16)]
 
 # Ampute dataset to randomly insert NAs
-music_missing <- ampute(music_data, 0.01)
+genres <- c("Classical", "Anime", "Hip-Hop", "Jazz")
+sub <- music_missing[which(music_missing$music_genre %in% genres), ]
+
 
 # Split the dataframe into train and test set (80/20)
-sample <- sample(1:nrow(music_missing), nrow(music_missing) * 0.8)
-train <- music_missing[sample, ]
-test <- music_missing[-sample, ]
 
+samp <- sample(1:nrow(sub), 4000)
+train <- sub[samp, ]
 
-sub <- music_data[which(label == "Rock" | label == "Blues" | label == "Rap"), ]
+# K <- 4
+# folds <- vector(mode = "list", length = K)
 
-# sub <- sub[, -2]
-best_bic_list <- list()
-for (G in 2:5) {
-    mnm_model <- MNM(sub, G, max_iter = 20, identity_cov = TRUE)
-    best_bic_list <- append(best_bic_list, mnm_model$BIC)
+# for (k in 1:K) {
+#     fold_size <- nrow(sub) / K
+#     folds[[k]] <- train[((k - 1) * fold_size + 1): (k * fold_size), ]
+# }
+
+for (noise in c(1, 5, 10, 30)) {
+    train <- music_data
+    train <- as.data.frame(cbind(scale(ampute(train[-12], noise / 100), train[12])))
+
+    mtm_model <- MtM(train[-12], 4, max_iter = 20, identity_cov = TRUE)
+    mnm_model <- MNM(train[-12], 4, max_iter = 20, identity_cov = TRUE)
+    mcnm_model <- MCNM(train[-12], 4, max_iter = 20, identity_cov = TRUE)
+
+    clusts <- character(nrow(train))
+    clusts[] <- "turquoise"
+    clusts[mcnm_model$clusters == 1] <- "purple"
+    clusts[mcnm_model$clusters == 2] <- "limegreen"
+    clusts[mcnm_model$clusters == 3] <- "blue"
+
+    # TODO calc ARI
+    # TODO show outliers
+
+    pairs(train[-12], col = clusts)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-# Plot BIC
-plot(as.numeric(best_bic_list), type = "b", pch = 20, col = "orange")
-grid(nx = NULL, ny = NULL, lty = 2, col = "black", lwd = 2)
-
-mnm_model <- MNM(music_missing, 3, max_iter = 1)
-
-ggplot(music_missing, aes(x = `BALANCE`, y = `PURCHASE`)) +
-    geom_point(aes(colour = factor(mnm_model$clusters))) +
-    scale_color_manual(values = c("green", "blue")) +
-    ggtitle("results")
-attach(music_missing)
-mnm_model$clusters
