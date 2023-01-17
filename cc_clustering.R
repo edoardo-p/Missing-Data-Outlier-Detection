@@ -18,7 +18,7 @@ for (G in 2:5) {
 }
 # mcnm_model <- MCNM(cc_missing, 2)
 
-ggplot(cc_missing, aes(x = `BALANCE`, y = `PAYMENTS`)) +
+ggplot(cc_missing, aes(x = `BALANCE`, y = `PURCHASES`)) +
     geom_point(aes(colour = factor(mnm_model$clusters))) +
-    scale_color_manual(values = c("green", "blue")) +
+    scale_color_manual(values = c("green", "blue", "red", "yellow", "purple")) +
     ggtitle("Results")
