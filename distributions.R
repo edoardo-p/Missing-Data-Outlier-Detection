@@ -20,15 +20,6 @@ contaminate <- function(data, eta, criterion) {
   return(data)
 }
 
-ampute <- function(data, prop) {
-  missing <- sample(1:nrow(data), nrow(data) * prop)
-  for (i in missing) {
-    select <- sample(1:ncol(data), 1)
-    data[i, select] <- NA
-  }
-  return(data)
-}
-
 set.seed(42)
 
 # Generate two datasets with 100 samples and two with 500 samples.
