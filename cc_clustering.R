@@ -1,4 +1,5 @@
 library(MixtureMissing)
+library(MixGHD)
 cat("\014")
 rm(list = ls())
 
@@ -26,14 +27,8 @@ music_data <- music_data[-which(is.na(music_data$tempo)), ]
 music_data <- music_data[-c(1, 2, 3, 10, 13, 16)]
 
 # Ampute dataset to randomly insert NAs
-genres <- c("Classical", "Anime", "Hip-Hop", "Jazz")
-sub <- music_missing[which(music_missing$music_genre %in% genres), ]
-
-
-# Split the dataframe into train and test set (80/20)
-
-samp <- sample(1:nrow(sub), 4000)
-train <- sub[samp, ]
+genres <- c("Classical", "Anime") # , "Hip-Hop", "Jazz")
+sub <- music_data[which(music_data$music_genre %in% genres), ]
 
 # K <- 4
 # folds <- vector(mode = "list", length = K)
@@ -43,22 +38,47 @@ train <- sub[samp, ]
 #     folds[[k]] <- train[((k - 1) * fold_size + 1): (k * fold_size), ]
 # }
 
-for (noise in c(1, 5, 10, 30)) {
-    train <- music_data
-    train <- as.data.frame(cbind(scale(ampute(train[-12], noise / 100), train[12])))
+samp <- sample(1:nrow(sub), 500)
+train <- sub[samp, ]
+noises <- c(1, 5, 10, 30)
+ari_values <- matrix(nrow = length(noises), ncol = 3)
+for (i in 1:length(noises)) {
+    train <- as.data.frame(cbind(ampute(train[-12], noises[i] / 100), train[12]))
 
-    mtm_model <- MtM(train[-12], 4, max_iter = 20, identity_cov = TRUE)
-    mnm_model <- MNM(train[-12], 4, max_iter = 20, identity_cov = TRUE)
-    mcnm_model <- MCNM(train[-12], 4, max_iter = 20, identity_cov = TRUE)
+    mtm_model <- MtM(train[-12], 2, max_iter = 20, identity_cov = TRUE)
+    mnm_model <- MNM(train[-12], 2, max_iter = 20, identity_cov = TRUE)
+    mcnm_model <- MCNM(train[-12], 2, max_iter = 20, identity_cov = TRUE)
 
-    clusts <- character(nrow(train))
-    clusts[] <- "turquoise"
-    clusts[mcnm_model$clusters == 1] <- "purple"
-    clusts[mcnm_model$clusters == 2] <- "limegreen"
-    clusts[mcnm_model$clusters == 3] <- "blue"
+    ari_values[i, 1] <- ARI(mtm_model$clusters, train$music_genre)
+    ari_values[i, 2] <- ARI(mnm_model$clusters, train$music_genre)
+    ari_values[i, 3] <- ARI(mcnm_model$clusters, train$music_genre)
+
+    # clusts <- character(nrow(train))
+    # clusts[] <- "turquoise"
+    # clusts[mcnm_model$clusters == 1] <- "purple"
+    # clusts[mcnm_model$clusters == 2] <- "limegreen"
+    # clusts[mcnm_model$clusters == 3] <- "blue"
+
+    # pairs(train[-12], col = clusts)
 
     # TODO calc ARI
     # TODO show outliers
-
-    pairs(train[-12], col = clusts)
 }
+
+ari_values
+clusts <- character(nrow(train))
+clusts[] <- "turquoise"
+clusts[mcnm_model$clusters == 1] <- "purple"
+# clusts[mcnm_model$clusters == 2] <- "limegreen"
+# clusts[mcnm_model$clusters == 3] <- "blue"
+
+labels <- character(nrow(train))
+labels[] <- "turquoise"
+labels[train$music_genre == "Anime"] <- "purple"
+# labels[train$music_genre == "Classical"] <- "limegreen"
+# labels[train$music_genre == "Jazz"] <- "blue"
+
+pairs(train[-12], col = clusts)
+
+plot(train$energy, train$tempo, col = clusts)
+plot(train$energy, train$tempo, col = labels)
