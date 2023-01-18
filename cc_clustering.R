@@ -5,12 +5,22 @@ rm(list = ls())
 
 
 ampute <- function(data, prop) {
-    missing <- sample(1:nrow(data), nrow(data) * prop)
-    for (i in missing) {
-        select <- sample(1:ncol(data), 1)
-        data[i, select] <- NA
-    }
-    return(data)
+  missing <- sample(1:nrow(data), nrow(data) * prop)
+  data$missing <- FALSE
+  for (i in missing) {
+    select <- sample(1:(ncol(data) - 1), 1)
+    data[i, select] <- NA
+    data$missing[i] <- TRUE
+  }
+  return(data)
+}
+
+contaminate <- function(data, eta) {
+  for (i in sample(1:nrow(data), nrow(data) * eta)) {
+    noisy <- runif(8, min = -1, max = 1)
+    data[i, 1:8] <- noisy
+  }
+  return(data)
 }
 
 # Data preprocessing
@@ -24,10 +34,11 @@ music_data <- music_data[-which(is.na(music_data$duration_ms)), ]
 music_data <- music_data[-which(is.na(music_data$tempo)), ]
 
 # Remove categorical variables and the label
-music_data <- music_data[-c(1, 2, 3, 10, 13, 16)]
+music_data <- music_data[-c(1, 2, 3, 7, 10, 11, 13, 14, 16)]
 
 # Ampute dataset to randomly insert NAs
-genres <- c("Classical", "Anime") # , "Hip-Hop", "Jazz")
+music_data <- ampute(music_data, 0.15)
+genres <- c("Electronic", "Classical")
 sub <- music_data[which(music_data$music_genre %in% genres), ]
 
 # K <- 4
@@ -38,47 +49,59 @@ sub <- music_data[which(music_data$music_genre %in% genres), ]
 #     folds[[k]] <- train[((k - 1) * fold_size + 1): (k * fold_size), ]
 # }
 
-samp <- sample(1:nrow(sub), 500)
-train <- sub[samp, ]
-noises <- c(1, 5, 10, 30)
+samp <- sample(1:nrow(sub), 300)
+noises <- c(0, 1, 5, 10, 30)
 ari_values <- matrix(nrow = length(noises), ncol = 3)
+train <- scale(sub[samp, -10:-9])
+label <- sub[samp, 9]
+missing <- sub[samp, 10]
+n_clusts <- length(genres)
+
 for (i in 1:length(noises)) {
-    train <- as.data.frame(cbind(ampute(train[-12], noises[i] / 100), train[12]))
+  train <- contaminate(train, noises[i] / 100)
+  mtm_model <- MtM(train, n_clusts, max_iter = 20, identity_cov = TRUE)
+  mnm_model <- MNM(train, n_clusts, max_iter = 20, identity_cov = TRUE)
+  mcnm_model <- MCNM(train, n_clusts, max_iter = 20, identity_cov = TRUE)
 
-    mtm_model <- MtM(train[-12], 2, max_iter = 20, identity_cov = TRUE)
-    mnm_model <- MNM(train[-12], 2, max_iter = 20, identity_cov = TRUE)
-    mcnm_model <- MCNM(train[-12], 2, max_iter = 20, identity_cov = TRUE)
+  ari_values[i, 1] <- ARI(mtm_model$clusters, label)
+  ari_values[i, 2] <- ARI(mnm_model$clusters, label)
+  ari_values[i, 3] <- ARI(mcnm_model$clusters, label)
 
-    ari_values[i, 1] <- ARI(mtm_model$clusters, train$music_genre)
-    ari_values[i, 2] <- ARI(mnm_model$clusters, train$music_genre)
-    ari_values[i, 3] <- ARI(mcnm_model$clusters, train$music_genre)
+  # clusts <- character(nrow(train))
+  # clusts[] <- "turquoise"
+  # clusts[mcnm_model$clusters == 1] <- "purple"
+  # clusts[mcnm_model$clusters == 2] <- "limegreen"
+  # clusts[mcnm_model$clusters == 3] <- "blue"
 
-    # clusts <- character(nrow(train))
-    # clusts[] <- "turquoise"
-    # clusts[mcnm_model$clusters == 1] <- "purple"
-    # clusts[mcnm_model$clusters == 2] <- "limegreen"
-    # clusts[mcnm_model$clusters == 3] <- "blue"
+  # pairs(train[-12], col = clusts)
 
-    # pairs(train[-12], col = clusts)
-
-    # TODO calc ARI
-    # TODO show outliers
+  # TODO show outliers
 }
 
-ari_values
-clusts <- character(nrow(train))
-clusts[] <- "turquoise"
-clusts[mcnm_model$clusters == 1] <- "purple"
-# clusts[mcnm_model$clusters == 2] <- "limegreen"
-# clusts[mcnm_model$clusters == 3] <- "blue"
 
-labels <- character(nrow(train))
-labels[] <- "turquoise"
-labels[train$music_genre == "Anime"] <- "purple"
-# labels[train$music_genre == "Classical"] <- "limegreen"
-# labels[train$music_genre == "Jazz"] <- "blue"
 
-pairs(train[-12], col = clusts)
 
-plot(train$energy, train$tempo, col = clusts)
-plot(train$energy, train$tempo, col = labels)
+colours <- character(nrow(train))
+colours[] <- "#00bfff"
+colours[(mcnm_model$clusters == 1) & !missing] <- "blue"
+colours[(mcnm_model$clusters == 2) & missing] <- "#ff5b5b"
+colours[(mcnm_model$clusters == 2) & !missing] <- "red"
+
+chars <- vector(mode = "numeric", length = nrow(train))
+chars[] <- 16
+chars[(mcnm_model$clusters == 1) & mcnm_model$outliers] <- 1
+chars[(mcnm_model$clusters == 2) & !mcnm_model$outliers] <- 17
+chars[(mcnm_model$clusters == 2) & mcnm_model$outliers] <- 2
+
+plot(train[, 3], train[, 7], pch = chars, col = colours)
+
+
+plot(c(0, 1, 5, 10, 30), ari_values[, 1], type = "b", pch = 16, col = "blue", xlab = "Noise", ylab = "ARI")
+points(c(0, 1, 5, 10, 30), ari_values[, 2], type = "b", pch = 16, col = "red")
+points(c(0, 1, 5, 10, 30), ari_values[, 3], type = "b", pch = 16, col = "green")
+legend(
+  x = "topright",
+  legend = c("MtM", "MNM", "MCNM"),
+  lty = c(1, 1, 1),
+  col = c("blue", "red", "green")
+)
