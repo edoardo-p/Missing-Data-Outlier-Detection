@@ -23,6 +23,8 @@ contaminate <- function(data, eta) {
   return(data)
 }
 
+set.seed(42)
+
 # Data preprocessing
 music_data <- read.csv("music_genre.csv")
 
@@ -49,7 +51,7 @@ sub <- music_data[which(music_data$music_genre %in% genres), ]
 #     folds[[k]] <- train[((k - 1) * fold_size + 1): (k * fold_size), ]
 # }
 
-samp <- sample(1:nrow(sub), 500)
+samp <- sample(1:nrow(sub), 300)
 noises <- c(0, 1, 5, 10, 30)
 
 train <- scale(sub[samp, -10:-9])
@@ -64,10 +66,10 @@ etas <- array(dim = c(length(noises), 2))
 means <- array(dim = c(length(noises), ncol(train), 2))
 
 for (i in 1:length(noises)) {
-  train <- contaminate(train, noises[i] / 100)
-  mtm_model <- MtM(train, n_clusts, max_iter = 20, identity_cov = TRUE)
-  mnm_model <- MNM(train, n_clusts, max_iter = 20, identity_cov = TRUE)
-  mcnm_model <- MCNM(train, n_clusts, max_iter = 20, identity_cov = TRUE)
+  # train <- contaminate(train, noises[i] / 100)
+  mtm_model <- MtM(train, n_clusts, max_iter = 30, identity_cov = TRUE)
+  mnm_model <- MNM(train, n_clusts, max_iter = 30, identity_cov = TRUE)
+  mcnm_model <- MCNM(train, n_clusts, max_iter = 30, identity_cov = TRUE)
 
   ari_values[i, 1] <- ARI(mtm_model$clusters, label)
   ari_values[i, 2] <- ARI(mnm_model$clusters, label)
@@ -79,9 +81,6 @@ for (i in 1:length(noises)) {
   means[i, , ] <- mcnm_model$mu
   break
 }
-
-
-
 
 colours <- character(nrow(train))
 colours[] <- "#00bfff"
@@ -95,12 +94,11 @@ chars[(mcnm_model$clusters == 1) & mcnm_model$outliers] <- 1
 chars[(mcnm_model$clusters == 2) & !mcnm_model$outliers] <- 17
 chars[(mcnm_model$clusters == 2) & mcnm_model$outliers] <- 2
 
-plot(train[, 3], train[, 7], pch = chars, col = colours)
+pairs(train, pch = chars, col = colours)
 
-
-plot(c(0, 1, 5, 10, 30), ari_values[, 1], type = "b", pch = 16, col = "blue", xlab = "Noise", ylab = "ARI")
-points(c(0, 1, 5, 10, 30), ari_values[, 2], type = "b", pch = 16, col = "red")
-points(c(0, 1, 5, 10, 30), ari_values[, 3], type = "b", pch = 16, col = "green")
+plot(noises, ari_values[, 1], type = "b", pch = 16, col = "blue", xlab = "Noise", ylab = "ARI")
+points(noises, ari_values[, 2], type = "b", pch = 16, col = "red")
+points(noises, ari_values[, 3], type = "b", pch = 16, col = "green")
 legend(
   x = "topright",
   legend = c("MtM", "MNM", "MCNM"),
