@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="httpgd" width="602.00" height="620.00" viewBox="0 0 602.00 620.00">
+<defs>
+<clipPath id="c0-1553aeba-67fa-481f-8ab1-276e0ce1bfc3"><rect x="0.00" y="0.00" width="602.00" height="620.00"/></clipPath>
+<clipPath id="c1-1553aeba-67fa-481f-8ab1-276e0ce1bfc3"><rect x="59.04" y="59.04" width="512.72" height="487.52"/></clipPath>
+<clipPath id="c2-1553aeba-67fa-481f-8ab1-276e0ce1bfc3"><rect x="0.00" y="0.00" width="602.00" height="620.00"/></clipPath>
+<clipPath id="c3-1553aeba-67fa-481f-8ab1-276e0ce1bfc3"><rect x="59.04" y="59.04" width="512.72" height="487.52"/></clipPath>
+</defs>
+<rect width="100%" height="100%" stroke="none" fill="#FFFFFF"/>
+<g clip-path="url(#c0-1553aeba-67fa-481f-8ab1-276e0ce1bfc3)">
+</g><g clip-path="url(#c1-1553aeba-67fa-481f-8ab1-276e0ce1bfc3)">
+<line x1="81.59" y1="83.35" x2="90.29" y2="98.65" stroke-width="0.75" stroke="#0000FF" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="99.35" y1="109.57" x2="151.66" y2="153.91" stroke-width="0.75" stroke="#0000FF" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="161.23" y1="164.50" x2="232.20" y2="267.63" stroke-width="0.75" stroke="#0000FF" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="241.88" y1="278.08" x2="547.16" y2="523.99" stroke-width="0.75" stroke="#0000FF" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="78.03" cy="77.10" r="2.70" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" fill="#0000FF"/>
+<circle cx="93.85" cy="104.91" r="2.70" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" fill="#0000FF"/>
+<circle cx="157.15" cy="158.56" r="2.70" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" fill="#0000FF"/>
+<circle cx="236.28" cy="273.56" r="2.70" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" fill="#0000FF"/>
+<circle cx="552.77" cy="528.50" r="2.70" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" fill="#0000FF"/>
+</g><g clip-path="url(#c2-1553aeba-67fa-481f-8ab1-276e0ce1bfc3)">
+<line x1="78.03" y1="546.56" x2="552.77" y2="546.56" stroke-width="0.75" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="78.03" y1="546.56" x2="78.03" y2="553.76" stroke-width="0.75" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="157.15" y1="546.56" x2="157.15" y2="553.76" stroke-width="0.75" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="236.28" y1="546.56" x2="236.28" y2="553.76" stroke-width="0.75" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="315.40" y1="546.56" x2="315.40" y2="553.76" stroke-width="0.75" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="394.52" y1="546.56" x2="394.52" y2="553.76" stroke-width="0.75" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="473.65" y1="546.56" x2="473.65" y2="553.76" stroke-width="0.75" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="552.77" y1="546.56" x2="552.77" y2="553.76" stroke-width="0.75" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+<g><text x="78.03" y="572.48" text-anchor="middle" font-family="Arial" font-size="12.00px" textLength="6.67px" lengthAdjust="spacingAndGlyphs">0</text></g>
+<g><text x="157.15" y="572.48" text-anchor="middle" font-family="Arial" font-size="12.00px" textLength="6.67px" lengthAdjust="spacingAndGlyphs">5</text></g>
+<g><text x="236.28" y="572.48" text-anchor="middle" font-family="Arial" font-size="12.00px" textLength="13.35px" lengthAdjust="spacingAndGlyphs">10</text></g>
+<g><text x="315.40" y="572.48" text-anchor="middle" font-family="Arial" font-size="12.00px" textLength="13.35px" lengthAdjust="spacingAndGlyphs">15</text></g>
+<g><text x="394.52" y="572.48" text-anchor="middle" font-family="Arial" font-size="12.00px" textLength="13.35px" lengthAdjust="spacingAndGlyphs">20</text></g>
+<g><text x="473.65" y="572.48" text-anchor="middle" font-family="Arial" font-size="12.00px" textLength="13.35px" lengthAdjust="spacingAndGlyphs">25</text></g>
+<g><text x="552.77" y="572.48" text-anchor="middle" font-family="Arial" font-size="12.00px" textLength="13.35px" lengthAdjust="spacingAndGlyphs">30</text></g>
+<line x1="59.04" y1="516.34" x2="59.04" y2="108.68" stroke-width="0.75" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="59.04" y1="516.34" x2="51.84" y2="516.34" stroke-width="0.75" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="59.04" y1="434.81" x2="51.84" y2="434.81" stroke-width="0.75" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="59.04" y1="353.27" x2="51.84" y2="353.27" stroke-width="0.75" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="59.04" y1="271.74" x2="51.84" y2="271.74" stroke-width="0.75" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="59.04" y1="190.21" x2="51.84" y2="190.21" stroke-width="0.75" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="59.04" y1="108.68" x2="51.84" y2="108.68" stroke-width="0.75" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"/>
+<g><text transform="translate(41.76,516.34) rotate(-90.00)" text-anchor="middle" font-family="Arial" font-size="12.00px" textLength="16.68px" lengthAdjust="spacingAndGlyphs">0.2</text></g>
+<g><text transform="translate(41.76,434.81) rotate(-90.00)" text-anchor="middle" font-family="Arial" font-size="12.00px" textLength="16.68px" lengthAdjust="spacingAndGlyphs">0.3</text></g>
+<g><text transform="translate(41.76,353.27) rotate(-90.00)" text-anchor="middle" font-family="Arial" font-size="12.00px" textLength="16.68px" lengthAdjust="spacingAndGlyphs">0.4</text></g>
+<g><text transform="translate(41.76,271.74) rotate(-90.00)" text-anchor="middle" font-family="Arial" font-size="12.00px" textLength="16.68px" lengthAdjust="spacingAndGlyphs">0.5</text></g>
+<g><text transform="translate(41.76,190.21) rotate(-90.00)" text-anchor="middle" font-family="Arial" font-size="12.00px" textLength="16.68px" lengthAdjust="spacingAndGlyphs">0.6</text></g>
+<g><text transform="translate(41.76,108.68) rotate(-90.00)" text-anchor="middle" font-family="Arial" font-size="12.00px" textLength="16.68px" lengthAdjust="spacingAndGlyphs">0.7</text></g>
+<polygon points="59.04,546.56 571.76,546.56 571.76,59.04 59.04,59.04" stroke-width="0.75" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<g><text x="315.40" y="601.28" text-anchor="middle" font-family="Arial" font-size="12.00px" textLength="30.69px" lengthAdjust="spacingAndGlyphs">Noise</text></g>
+<g><text transform="translate(12.96,302.80) rotate(-90.00)" text-anchor="middle" font-family="Arial" font-size="12.00px" textLength="20.01px" lengthAdjust="spacingAndGlyphs">ARI</text></g>
+</g><g clip-path="url(#c3-1553aeba-67fa-481f-8ab1-276e0ce1bfc3)">
+<line x1="81.61" y1="92.68" x2="90.27" y2="107.79" stroke-width="0.75" stroke="#FF0000" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="99.74" y1="118.18" x2="151.26" y2="154.42" stroke-width="0.75" stroke="#FF0000" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="161.06" y1="164.62" x2="232.37" y2="275.18" stroke-width="0.75" stroke="#FF0000" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="241.95" y1="285.66" x2="547.10" y2="524.07" stroke-width="0.75" stroke="#FF0000" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="78.03" cy="86.44" r="2.70" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" fill="#FF0000"/>
+<circle cx="93.85" cy="114.03" r="2.70" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" fill="#FF0000"/>
+<circle cx="157.15" cy="158.56" r="2.70" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" fill="#FF0000"/>
+<circle cx="236.28" cy="281.23" r="2.70" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" fill="#FF0000"/>
+<circle cx="552.77" cy="528.50" r="2.70" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" fill="#FF0000"/>
+<line x1="84.23" y1="80.76" x2="87.66" y2="82.78" stroke-width="0.75" stroke="#00FF00" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="98.01" y1="92.32" x2="152.99" y2="170.00" stroke-width="0.75" stroke="#00FF00" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="161.68" y1="181.47" x2="231.74" y2="267.96" stroke-width="0.75" stroke="#00FF00" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="241.88" y1="278.08" x2="547.16" y2="523.99" stroke-width="0.75" stroke="#00FF00" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="78.03" cy="77.10" r="2.70" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" fill="#00FF00"/>
+<circle cx="93.85" cy="86.44" r="2.70" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" fill="#00FF00"/>
+<circle cx="157.15" cy="175.87" r="2.70" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" fill="#00FF00"/>
+<circle cx="236.28" cy="273.56" r="2.70" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" fill="#00FF00"/>
+<circle cx="552.77" cy="528.50" r="2.70" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" fill="#00FF00"/>
+<rect x="485.82" y="59.04" width="85.94" height="57.60" stroke-width="0.75" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" fill="#FFFFFF"/>
+<line x1="496.62" y1="73.44" x2="518.22" y2="73.44" stroke-width="0.75" stroke="#0000FF" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="496.62" y1="87.84" x2="518.22" y2="87.84" stroke-width="0.75" stroke="#FF0000" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="496.62" y1="102.24" x2="518.22" y2="102.24" stroke-width="0.75" stroke="#00FF00" stroke-linecap="round" stroke-linejoin="round"/>
+<g><text x="529.02" y="77.74" font-family="Arial" font-size="12.00px" textLength="23.34px" lengthAdjust="spacingAndGlyphs">MtM</text></g>
+<g><text x="529.02" y="92.14" font-family="Arial" font-size="12.00px" textLength="28.67px" lengthAdjust="spacingAndGlyphs">MNM</text></g>
+<g><text x="529.02" y="106.54" font-family="Arial" font-size="12.00px" textLength="37.34px" lengthAdjust="spacingAndGlyphs">MCNM</text></g>
+</g>
+</svg>
