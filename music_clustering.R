@@ -49,13 +49,19 @@ sub <- music_data[which(music_data$music_genre %in% genres), ]
 #     folds[[k]] <- train[((k - 1) * fold_size + 1): (k * fold_size), ]
 # }
 
-samp <- sample(1:nrow(sub), 300)
+samp <- sample(1:nrow(sub), 500)
 noises <- c(0, 1, 5, 10, 30)
-ari_values <- matrix(nrow = length(noises), ncol = 3)
+
 train <- scale(sub[samp, -10:-9])
 label <- sub[samp, 9]
 missing <- sub[samp, 10]
 n_clusts <- length(genres)
+
+ari_values <- array(dim = c(length(noises), 3))
+priors <- array(dim = c(length(noises), 2))
+alphas <- array(dim = c(length(noises), 2))
+etas <- array(dim = c(length(noises), 2))
+means <- array(dim = c(length(noises), ncol(train), 2))
 
 for (i in 1:length(noises)) {
   train <- contaminate(train, noises[i] / 100)
@@ -67,15 +73,11 @@ for (i in 1:length(noises)) {
   ari_values[i, 2] <- ARI(mnm_model$clusters, label)
   ari_values[i, 3] <- ARI(mcnm_model$clusters, label)
 
-  # clusts <- character(nrow(train))
-  # clusts[] <- "turquoise"
-  # clusts[mcnm_model$clusters == 1] <- "purple"
-  # clusts[mcnm_model$clusters == 2] <- "limegreen"
-  # clusts[mcnm_model$clusters == 3] <- "blue"
-
-  # pairs(train[-12], col = clusts)
-
-  # TODO show outliers
+  priors[i, ] <- mcnm_model$pi
+  alphas[i, ] <- mcnm_model$alpha
+  etas[i, ] <- mcnm_model$eta
+  means[i, , ] <- mcnm_model$mu
+  break
 }
 
 
