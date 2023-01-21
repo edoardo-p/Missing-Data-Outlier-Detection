@@ -1,3 +1,6 @@
+cat("\014")
+rm(list = ls())
+
 library(mclust)
 source("distributions.R")
 

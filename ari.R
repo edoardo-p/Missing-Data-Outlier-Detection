@@ -4,7 +4,8 @@ library(MixtureMissing)
 
 source("distributions.R")
 
-# Plot clusters, with missclassified points in red
+# Plot clusters, with missclassified points in redù
+
 plot_results <- function(df, classified, title = "Results") {
   first_cluster <- df$V3[1]
   if (first_cluster == 1) {
@@ -20,6 +21,7 @@ plot_results <- function(df, classified, title = "Results") {
 
 
 # CASE LARGE condensate
+
 i = 1
 for (x in distros_large){
   m = Mclust(x , G = 2)
@@ -28,7 +30,9 @@ for (x in distros_large){
   i = i + 1
 }
 
+
 # CASE SMALL condensate
+
 j = 1
 for (y in distros_small){
   n = Mclust(y , G = 2)

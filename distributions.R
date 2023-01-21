@@ -24,6 +24,7 @@ set.seed(42)
 
 # Generate two datasets with 100 samples and two with 500 samples.
 # Datasets are generated from mixture models and are bidimensional.
+
 n_small <- 100
 n_large <- 500
 pi1 <- 0.3
