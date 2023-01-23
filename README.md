@@ -8,6 +8,7 @@ the Spotify API. Clustering will be performed using the Multivariate Contaminate
 Mixture (MCNM) model.
 
 
-### Team Member:
-    - Edoardo Protti ([@edoardo-p](https://github.com/edoardo-p))
-    - Ayoube Ighissou ([@ayoubighissou99](https://github.com/ayoubighissou99))
+## Team Member:
+
+- Edoardo Protti ([@edoardo-p](https://github.com/edoardo-p))
+- Ayoube Ighissou ([@ayoubighissou99](https://github.com/ayoubighissou99))
