@@ -6,3 +6,8 @@ Tortora and Hung Tong. We will utilize the 'MixtureMissing' package for this tas
 apply it to a real-world dataset, specifically the 'Music-Genre' dataset obtained from 
 the Spotify API. Clustering will be performed using the Multivariate Contaminated Normal 
 Mixture (MCNM) model.
+
+
+### Team Member:
+    - [![Edoardo Protti]]()
+    - [![Ayoube Ighissou]](https://www.linkedin.com/in/ayoubighissou/)
