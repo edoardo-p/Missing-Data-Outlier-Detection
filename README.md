@@ -9,5 +9,5 @@ Mixture (MCNM) model.
 
 
 ### Team Member:
-    - [![Edoardo Protti]]()
-    - [![Ayoube Ighissou](https://img.shields.io/badge/-LinkedIn-blue?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/ayoubighissou/)
+    - Edoardo Protti ([@edoardo-p](https://github.com/edoardo-p))
+    - Ayoube Ighissou ([@ayoubighissou99](https://github.com/ayoubighissou99))
